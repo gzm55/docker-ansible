@@ -11,4 +11,4 @@ RUN set -eux \
             \( \( -type d -a -name test -o -name tests \) \
                -o \
                \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-            \) -delete
+            \) -exec rm -rf '{}' +
