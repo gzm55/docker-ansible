@@ -5,11 +5,10 @@ RUN set -eux \
                           openssh-client \
                           ca-certificates \
                           git \
-                          bash \
 
     ## cleanup
     && find /usr/ -depth \
             \( \( -type d -a -name test -o -name tests \) \
                -o \
                \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-            \) -exec rm -rf '{}' + \
+            \) -delete
