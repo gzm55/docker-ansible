@@ -1,3 +1,5 @@
 sut:
   build: .
-  command: sh -c "ansible --version && ansible-galaxy install mrlesmithjr.bootstrap && ansible-galaxy install git+https://github.com/geerlingguy/ansible-role-composer.git"
+  command: /test/test-all.sh
+  volumes:
+  - ./test:/test
