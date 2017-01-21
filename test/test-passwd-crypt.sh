@@ -1,4 +1,7 @@
 echo
 echo "Check ability of crypting the password from prompt."
 
-echo 123 | ansible-playbook -i inv test-passwd-crypt.yml
+echo "" \
+| ansible-playbook -i inv test-passwd-crypt.yml 2>&1 \
+| grep 'ERROR! Unexpected Exception: secret must be unicode or bytes, not None' \
+&& echo "See the expected exception."
