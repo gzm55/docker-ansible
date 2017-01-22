@@ -8,6 +8,8 @@ RUN set -eux \
                                         git \
     && pip install passlib \
 
+    ## add default ansible config
+    && mkdir -p /etc/ansible \
     && echo -e "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
 
     && touch /etc/ssh/ssh_known_hosts \
