@@ -11,7 +11,12 @@ RUN set -eux \
     ## cleanup
     && apk del --no-cache .build-deps \
     && find /usr/ -depth \
-            \( \( ! -path '*/ansible/*' -a \( -type d -a -name test -o -name tests \) \) \
-               -o \
-               \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-            \) -print -exec rm -rf '{}' +
+            \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+            -delete \
+    && find /usr/ -depth \
+            \( ! -path '*/ansible/*' \
+               -a \
+               \( -type d -a -name test -o -name tests \) \
+            \) \
+            -print \
+            -exec rm -rf '{}' +
