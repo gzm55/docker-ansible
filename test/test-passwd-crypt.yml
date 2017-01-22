@@ -1,4 +1,3 @@
-# test by  echo 123 | ansible-playbook -i inv pl.yml
 ---
 - hosts: 127.0.0.1
   vars_prompt:

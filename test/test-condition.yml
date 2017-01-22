@@ -1,0 +1,8 @@
+---
+- hosts: 127.0.0.1
+  gather_facts: False
+  connection: local
+  tasks:
+    - name: make sure test plugin works
+      ping:
+      failed_when: True == False
