@@ -10,5 +10,5 @@ do
   rm -f $HOME/.ssh/known_hosts || true
   ssh-keygen -F $h -f /etc/ssh/ssh_known_hosts
   ssh -o StrictHostKeyChecking=yes -o PreferredAuthentications=publickey nobody@$h 2>&1 | grep -q 'Permission denied'
-  ssh-keygen -F $h -f $HOME/.ssh/known_hosts && exit 22
+  ! ssh-keygen -F $h -f $HOME/.ssh/known_hosts
 done
