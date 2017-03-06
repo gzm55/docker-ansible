@@ -9,7 +9,7 @@ RUN set -eux \
                                         sshpass \
                                         ca-certificates \
                                         git \
-    && pip install passlib \
+    && pip install passlib pexpect \
 
     ## add default ansible config
     && mkdir -p /etc/ansible \
