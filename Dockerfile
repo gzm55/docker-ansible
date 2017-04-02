@@ -19,7 +19,9 @@ RUN set -eux \
     && chmod 644 /etc/ssh/ssh_known_hosts \
 
     ## fix role spec unused warning
+    && cp /usr/lib/python2.7/site-packages/ansible/playbook/role/requirement.py / \
     && patch -p 0 -i /role-spec-issue-14612.patch \
+    && diff -EU3 /requirement.py /usr/lib/python2.7/site-packages/ansible/playbook/role/requirement.py || true \
 
     ## fix ssh connection plugin
     && patch -p 0 -i /ssh-args-issue-20862.patch \
