@@ -18,11 +18,11 @@ RUN set -eux \
     && touch /etc/ssh/ssh_known_hosts \
     && chmod 644 /etc/ssh/ssh_known_hosts \
 
-    ## fix ssh connection plugin
-    && patch -p 0 -i /ssh-args-issue-20862.patch \
-
     ## fix role spec unused warning
     && patch -p 0 -i /role-spec-issue-14612.patch \
+
+    ## fix ssh connection plugin
+    && patch -p 0 -i /ssh-args-issue-20862.patch \
 
     ## add ssh host keys for github.com
     && ssh-keygen -R github.com -f /etc/ssh/ssh_known_hosts \
