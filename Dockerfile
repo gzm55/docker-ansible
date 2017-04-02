@@ -21,6 +21,9 @@ RUN set -eux \
     ## fix ssh connection plugin
     && patch -p 0 -i /ssh-args-issue-20862.patch \
 
+    ## fix role spec unused warning
+    && patch -p 0 -i /role-spec-issue-14612.patch \
+
     ## add ssh host keys for github.com
     && ssh-keygen -R github.com -f /etc/ssh/ssh_known_hosts \
     && echo "|1|SsNpF6474W7GtoyqkT38Ndvj4og=|PXRZyqqgiYKBJ8m8CnVFx599g6U= ssh-dss AAAAB3NzaC1kc3MAAACBANGFW2P9xlGU3zWrymJgI/lKo//ZW2WfVtmbsUZJ5uyKArtlQOT2+WRhcg4979aFxgKdcsqAYW3/LS1T2km3jYW/vr4Uzn+dXWODVk5VlUiZ1HFOHf6s6ITcZvjvdbp6ZbpM+DuJT7Bw+h5Fx8Qt8I16oCZYmAPJRtu46o9C2zk1AAAAFQC4gdFGcSbp5Gr0Wd5Ay/jtcldMewAAAIATTgn4sY4Nem/FQE+XJlyUQptPWMem5fwOcWtSXiTKaaN0lkk2p2snz+EJvAGXGq9dTSWHyLJSM2W6ZdQDqWJ1k+cL8CARAqL+UMwF84CR0m3hj+wtVGD/J4G5kW2DBAf4/bqzP4469lT+dF2FRQ2L9JKXrCWcnhMtJUvua8dvnwAAAIB6C4nQfAA7x8oLta6tT+oCk2WQcydNsyugE8vLrHlogoWEicla6cWPk7oXSspbzUcfkjN3Qa6e74PhRkc7JdSdAlFzU3m7LMkXo1MHgkqNX8glxWNVqBSc0YRdbFdTkL0C6gtpklilhvuHQCdbgB3LBAikcRkDp+FCVkUgPC/7Rw==" >> /etc/ssh/ssh_known_hosts \
@@ -61,7 +64,7 @@ RUN set -eux \
     && echo "|1|xOnX2VH7py+y8D9o+DjDLGaXmmk=|JGRvbDmasXoUuznPvMftopjlD8I= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAoMesJ60dow5VqNsIqIQMBNmSYz6txSC5YSUXzPNWV4VIWTWdqbQoQuIu+oYGhBMoeaSWWCiVIDTwFDzQXrq8CwmyxWp+2TTuscKiOw830N2ycIVmm3ha0x6VpRGm37yo+z+bkQS3m/sE7bkfTU72GbeKufFHSv1VLnVy9nmJKFOraeKSHP/kjmatj9aC7Q2n8QzFWWjzMxVGg79TUs7sjm5KrtytbxfbLbKtrkn8OXsRy1ib9hKgOwg+8cRjwKbSXVrNw/HM+MJJWp9fHv2yzWmL8B6fKoskslA0EjNxa6d76gvIxwti89/8Y6xlhR0u65u1AiHTX9Q4BVsXcBZUDw==" >> /etc/ssh/ssh_known_hosts \
 
     ## cleanup
-    && rm -f /etc/ssh/ssh_known_hosts.old /ssh-args-issue-20862.patch \
+    && rm -f /etc/ssh/ssh_known_hosts.old /ssh-args-issue-20862.patch /role-spec-issue-14612.patch \
     && apk del --no-cache .build-deps \
     && find /usr/ -depth \
             \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
