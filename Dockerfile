@@ -3,7 +3,7 @@ FROM alpine:3.5
 ADD content /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --virtual .build-deps py2-pip \
+    && apk add --no-cache --no-progress --virtual .build-deps py2-pip patch \
     && apk add --no-cache --no-progress ansible=2.2.1.0-r0 \
                                         openssh-client \
                                         sshpass \
