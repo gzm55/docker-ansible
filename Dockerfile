@@ -21,9 +21,6 @@ RUN set -eux \
     ## fix role spec unused warning
     && patch -p 0 -i /role-spec-issue-14612.patch \
 
-    ## fix ssh connection plugin
-    && patch -p 0 -i /ssh-args-issue-20862.patch \
-
     ## add ssh host keys for github.com
     && ssh-keygen -R github.com -f /etc/ssh/ssh_known_hosts \
     && echo "|1|SsNpF6474W7GtoyqkT38Ndvj4og=|PXRZyqqgiYKBJ8m8CnVFx599g6U= ssh-dss AAAAB3NzaC1kc3MAAACBANGFW2P9xlGU3zWrymJgI/lKo//ZW2WfVtmbsUZJ5uyKArtlQOT2+WRhcg4979aFxgKdcsqAYW3/LS1T2km3jYW/vr4Uzn+dXWODVk5VlUiZ1HFOHf6s6ITcZvjvdbp6ZbpM+DuJT7Bw+h5Fx8Qt8I16oCZYmAPJRtu46o9C2zk1AAAAFQC4gdFGcSbp5Gr0Wd5Ay/jtcldMewAAAIATTgn4sY4Nem/FQE+XJlyUQptPWMem5fwOcWtSXiTKaaN0lkk2p2snz+EJvAGXGq9dTSWHyLJSM2W6ZdQDqWJ1k+cL8CARAqL+UMwF84CR0m3hj+wtVGD/J4G5kW2DBAf4/bqzP4469lT+dF2FRQ2L9JKXrCWcnhMtJUvua8dvnwAAAIB6C4nQfAA7x8oLta6tT+oCk2WQcydNsyugE8vLrHlogoWEicla6cWPk7oXSspbzUcfkjN3Qa6e74PhRkc7JdSdAlFzU3m7LMkXo1MHgkqNX8glxWNVqBSc0YRdbFdTkL0C6gtpklilhvuHQCdbgB3LBAikcRkDp+FCVkUgPC/7Rw==" >> /etc/ssh/ssh_known_hosts \
