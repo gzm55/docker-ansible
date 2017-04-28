@@ -18,9 +18,6 @@ RUN set -eux \
     && touch /etc/ssh/ssh_known_hosts \
     && chmod 644 /etc/ssh/ssh_known_hosts \
 
-    ## fix role spec unused warning
-    ## patch -p 0 -i /role-spec-issue-14612.patch
-
     ## fix escape of ansible_cmdline
     && patch -p 0 -i /ansible_cmdline-issue-23647.patch \
 
@@ -58,7 +55,7 @@ RUN set -eux \
     && echo "|1|xOnX2VH7py+y8D9o+DjDLGaXmmk=|JGRvbDmasXoUuznPvMftopjlD8I= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAoMesJ60dow5VqNsIqIQMBNmSYz6txSC5YSUXzPNWV4VIWTWdqbQoQuIu+oYGhBMoeaSWWCiVIDTwFDzQXrq8CwmyxWp+2TTuscKiOw830N2ycIVmm3ha0x6VpRGm37yo+z+bkQS3m/sE7bkfTU72GbeKufFHSv1VLnVy9nmJKFOraeKSHP/kjmatj9aC7Q2n8QzFWWjzMxVGg79TUs7sjm5KrtytbxfbLbKtrkn8OXsRy1ib9hKgOwg+8cRjwKbSXVrNw/HM+MJJWp9fHv2yzWmL8B6fKoskslA0EjNxa6d76gvIxwti89/8Y6xlhR0u65u1AiHTX9Q4BVsXcBZUDw==" >> /etc/ssh/ssh_known_hosts \
 
     ## cleanup
-    && rm -f /etc/ssh/ssh_known_hosts.old /ansible_cmdline-issue-23647.patch /role-spec-issue-14612.patch \
+    && rm -f /etc/ssh/ssh_known_hosts.old /ansible_cmdline-issue-23647.patch \
     && apk del --no-cache .build-deps \
     && find /usr/ -depth \
             \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
