@@ -22,7 +22,7 @@ RUN set -eux \
     ## patch -p 0 -i /role-spec-issue-14612.patch
 
     ## fix escape of ansible_cmdline
-    && patch -p 0 -i /ansible_cmdline-issue-23647.patch
+    && patch -p 0 -i /ansible_cmdline-issue-23647.patch \
 
     ## add ssh host keys for github.com
     && ssh-keygen -R github.com -f /etc/ssh/ssh_known_hosts \
