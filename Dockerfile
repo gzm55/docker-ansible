@@ -4,7 +4,7 @@ ADD content /
 
 RUN set -eux \
     && apk add --no-cache --no-progress --virtual .build-deps py2-pip patch \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.3.0.0-r0 \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.3.0.0-r1 \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
