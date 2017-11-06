@@ -1,1 +1,4 @@
 *.retry
+/content/etc/apk/repositories
+/content/root/.config/pip/pip.conf
+/content/root/.pydistutils.cfg
