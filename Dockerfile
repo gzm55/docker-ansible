@@ -1,6 +1,6 @@
 FROM alpine:3.7
 
-ADD content /
+## ADD content /
 
 RUN set -eux \
     && apk add --no-cache --no-progress --virtual .build-deps py2-pip \
