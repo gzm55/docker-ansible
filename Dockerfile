@@ -9,7 +9,7 @@ RUN set -eux \
                                         sshpass \
                                         ca-certificates \
                                         git \
-    && apk upgrade musl \
+    && apk upgrade --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main musl musl-utils \
     && pip install passlib pexpect \
     ##
     ## add default ansible config
