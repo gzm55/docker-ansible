@@ -3,14 +3,19 @@ FROM alpine:3.8
 #ADD content-dev /
 
 RUN set -eux \
+    ## musl of ansible 3.8 is not compatible with python3, need upgrade the the edge version
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main --upgrade musl musl-utils \
     && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.7.0-r0 \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
                                         git \
-    ## musl of ansible 3.8 is not compatible with python3, need upgrade the the edge version
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main --upgrade musl musl-utils \
-    && pip3 install passlib pexpect \
+    ## add useful symbol links for python
+    && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi \
+    && if [[ ! -e /usr/bin/pydoc ]]; then ln -sf /usr/bin/pydoc3 /usr/bin/pydoc; fi \
+    && if [[ ! -e /usr/bin/pip ]]; then ln -sf /usr/bin/pip3 /usr/bin/pip; fi \
+    ## add python packages for runtime deps
+    && pip install passlib pexpect \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
