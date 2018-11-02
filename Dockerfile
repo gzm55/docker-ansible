@@ -3,14 +3,14 @@ FROM alpine:3.8
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --virtual .build-deps py2-pip \
     && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.7.0-r0 \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
                                         git \
-    && apk upgrade --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main musl musl-utils \
-    && pip install passlib pexpect \
+    ## musl of ansible 3.8 is not compatible with python3, need upgrade the the edge version
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main --upgrade musl musl-utils \
+    && pip3 install passlib pexpect \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
@@ -54,7 +54,6 @@ RUN set -eux \
     ##
     ## cleanup
     && rm -rf ~/.cache /etc/ssh/ssh_known_hosts.old \
-    && apk del --no-cache .build-deps \
     && find /usr/ -depth \
             \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
             -delete \
