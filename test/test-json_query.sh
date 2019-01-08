@@ -1,4 +1,4 @@
 echo
-echo "Check expect module working."
+echo "Check json_query."
 
-ansible-playbook test/test-json_query.yml
+ansible-playbook test-json_query.yml
