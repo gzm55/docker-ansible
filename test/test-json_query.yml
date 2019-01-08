@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: False
+  vars:
+    domain_definition:
+      domain:
+        cluster:
+          - name: "cluster1"
+          - name: "cluster2"
+        server:
+          - name: "server11"
+            cluster: "cluster1"
+            port: "8080"
+          - name: "server12"
+            cluster: "cluster1"
+            port: "8090"
+  tasks:
+  - name: test json_query
+    assert:
+      that: "domain_definition | json_query('domain.cluster[*].name') | join(',') == 'cluster1,cluster2'"
