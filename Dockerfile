@@ -3,7 +3,8 @@ FROM alpine:3.9
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.8.1-r0 ansible-lint \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.8.1-r0 \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ansible-lint \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
