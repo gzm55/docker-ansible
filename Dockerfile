@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.12
 
 #ADD content-dev /
 
@@ -9,6 +9,7 @@ RUN set -eux \
                                         sshpass \
                                         ca-certificates \
                                         git \
+                                        py3-pip \
     ## add python packages for runtime deps
     && pip3 install passlib pexpect jmespath python-gitlab \
     ##
