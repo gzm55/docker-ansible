@@ -11,7 +11,7 @@ RUN set -eux \
                                         git \
                                         py3-pip \
     ## add python packages for runtime deps
-    && pip3 install passlib pexpect jmespath python-gitlab \
+    && pip3 install passlib pexpect jmespath 'python-gitlab<=1.12.1' \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
