@@ -15,5 +15,3 @@ if grep 'Failed to import the required Python library' "$out"; then
 fi
 
 rm -f "$out" || :
-
-exit 0
