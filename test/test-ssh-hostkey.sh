@@ -3,7 +3,7 @@ echo "Check public ssh host keys."
 
 for h in github.com \
          bitbucket.com bitbucket.org \
-         gitlab.com gitlab.org \
+         gitlab.com \
          git.code.sf.net
 do
   echo "testing for nobody@$h..."
