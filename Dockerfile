@@ -46,6 +46,10 @@ RUN set -eux \
     && echo "|1|IKeEnLTeV2nLXmOaa5yKGmCAuos=|ofrcaOgwO/nUi6WMLrqDB5Fgsm4= ssh-dss AAAAB3NzaC1kc3MAAACBAPcVQoevF5HL/lACcED4UE1tG8C1azvBHOys0K2qOHZsBQgFB1O1TPrbPAloUE7/IonmDRj7lXHTA4E966yPzylJYSH1AFbpMyfcTj+mxzI53bxgqXJP2vF8cpbZEESHScEblj0cTrBAPt6sdL1Ri9HhKmTf/ROURQt2oKhP47k1AAAAFQCnPKju25JH+CgE0dzJ6mr8JDc/nwAAAIEA6VCjv+Zgn5/e9QEdjI0+BbHHHscg+Hl739SZ92JsgCbsE62o2MEBsZy2tirpFsWfQVa8acvy3HTqSWmOnooYa4ElmArPvsfwP0D1VIjrpxbBH6k9q/Xk4PqmEQKV+xV/bERsqo+hddYuAVk7iLq9L0MX05FWGCrepZ8PHFLOY6MAAACBAIgECy1Hh0I/cfK4zURY4HH95tQydg5/CQcuM83g9F/fqwBD7F5cRBSTXvnJocmFEgzi04hms2N3IQ7idkGU0IeKmuLNTzs6vO1sHIPFgkyk52YM78Y86YlpUeGwxha7ErxC4nRGon32DMNwLGfQRlVIDoWjwYyQ+DjacJ6fIv71" >> /etc/ssh/ssh_known_hosts \
     && echo "|1|xOnX2VH7py+y8D9o+DjDLGaXmmk=|JGRvbDmasXoUuznPvMftopjlD8I= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAoMesJ60dow5VqNsIqIQMBNmSYz6txSC5YSUXzPNWV4VIWTWdqbQoQuIu+oYGhBMoeaSWWCiVIDTwFDzQXrq8CwmyxWp+2TTuscKiOw830N2ycIVmm3ha0x6VpRGm37yo+z+bkQS3m/sE7bkfTU72GbeKufFHSv1VLnVy9nmJKFOraeKSHP/kjmatj9aC7Q2n8QzFWWjzMxVGg79TUs7sjm5KrtytbxfbLbKtrkn8OXsRy1ib9hKgOwg+8cRjwKbSXVrNw/HM+MJJWp9fHv2yzWmL8B6fKoskslA0EjNxa6d76gvIxwti89/8Y6xlhR0u65u1AiHTX9Q4BVsXcBZUDw==" >> /etc/ssh/ssh_known_hosts \
     ##
+    ## create ~/.ssh dir with correct permission
+    && mkdir ~/.ssh \
+    && chmod 700 ~/.ssh \
+    ##
     ## cleanup
     && rm -rf ~/.cache /etc/ssh/ssh_known_hosts.old \
     && find /usr/ -depth \
