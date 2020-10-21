@@ -10,8 +10,9 @@ RUN set -eux \
                                         ca-certificates \
                                         git \
                                         py3-pip \
+                                        rsync \
     ## add python packages for runtime deps
-    && pip3 install passlib pexpect jmespath 'python-gitlab<=1.12.1' keyring sagecipher rsync \
+    && pip3 install passlib pexpect jmespath 'python-gitlab<=1.12.1' keyring sagecipher \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
