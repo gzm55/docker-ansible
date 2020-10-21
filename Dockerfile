@@ -3,7 +3,7 @@ FROM alpine:3.12
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.9.11-r0 \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.10.1-r0 \
     && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ansible-lint \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
@@ -11,7 +11,7 @@ RUN set -eux \
                                         git \
                                         py3-pip \
     ## add python packages for runtime deps
-    && pip3 install passlib pexpect jmespath 'python-gitlab<=1.12.1' keyring sagecipher \
+    && pip3 install passlib pexpect jmespath 'python-gitlab<=1.12.1' keyring sagecipher rsync \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
