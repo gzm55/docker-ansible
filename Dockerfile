@@ -13,7 +13,7 @@ RUN set -eux \
                                         rsync \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
-    && pip3 install passlib pexpect jmespath 'python-gitlab<=1.12.1' keyring sagecipher \
+    && pip3 install passlib pexpect jmespath python-gitlab keyring sagecipher \
     && apk del .build-deps \
     ##
     ## add default ansible config
