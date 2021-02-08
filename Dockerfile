@@ -1,9 +1,9 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.10.1-r0 \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.10.6-r0 \
     && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ansible-lint \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
@@ -13,7 +13,7 @@ RUN set -eux \
                                         rsync \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
-    && pip3 install passlib pexpect jmespath python-gitlab keyring sagecipher \
+    && pip3 install passlib pexpect jmespath 'python-gitlab>=2.6.0' keyring sagecipher \
     && apk del .build-deps \
     ##
     ## add default ansible config
