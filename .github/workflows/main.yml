@@ -1,0 +1,32 @@
+name: build and push images
+
+on:
+  push:
+    branches:
+    - master
+
+env:
+  TEST_TAG: gzm55/ansible:test
+  LATEST_TAG: gzm55/ansible:latest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # skip login now
+
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: ${{ env.TEST_TAG }}
+
+      - name: Test
+        run: docker run --rm -v "`pwd`"/test:/test ${{ env.TEST_TAG }} /test/test-all.sh
