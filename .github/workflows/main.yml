@@ -44,7 +44,6 @@ jobs:
     if: github.repository == 'gzm55/docker-ansible' && startsWith(github.ref, 'refs/tags/v')
     # ref_protected is not set to true for protected tags now
     # ref: https://github.com/orgs/community/discussions/10906#discussioncomment-3915816
-    runs-on: ubuntu-latest
 
     steps:
     - name: Login to Docker Hub
