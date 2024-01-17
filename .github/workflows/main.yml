@@ -3,11 +3,15 @@ name: build and push images
 on:
   push:
     branches:
-    - master
+    - '**' # matches every branch
+    tags:
+    - 'v[0-9.]+-r[0-9]+'
+    - 'v[0-9.]+-r[0-9]+-[0-9]+'
+    pull_request:
 
 env:
   TEST_TAG: gzm55/ansible:test
-  LATEST_TAG: gzm55/ansible:latest
+  LATEST_TAG: gzm55/ansible:latest,gzm55/ansible:9.1
 
 jobs:
   build:
@@ -19,16 +23,40 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # skip login now
-
       - name: Build and export to Docker
         uses: docker/build-push-action@v5
         with:
           load: true
           tags: ${{ env.TEST_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Checkout for Test
         uses: actions/checkout@v4
 
       - name: Test
         run: docker run --rm -v "`pwd`"/test:/test ${{ env.TEST_TAG }} /test/test-all.sh
+
+  release-on-tag:
+    runs-on: ubuntu-latest
+    name: 'Push image on tag ${{ github.ref_name }}'
+    needs: build
+    if: github.repository == 'gzm55/docker-ansible' && startsWith(github.ref, 'refs/tags/v')
+    # ref_protected is not set to true for protected tags now
+    # ref: https://github.com/orgs/community/discussions/10906#discussioncomment-3915816
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: ${{ env.LATEST_TAG }}
+        cache-from: type=gha
