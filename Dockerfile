@@ -13,14 +13,15 @@ RUN set -eux \
                                         ansible-lint \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
-    && { { find / -name EXTERNALLY-MANAGED && rm /usr/lib/python3.11/EXTERNALLY-MANAGED; } || : debug; } \
+    && { find / -name EXTERNALLY-MANAGED || : debug; } \
+    && { rm /usr/lib/python3.11/EXTERNALLY-MANAGED || : debug; } \
     && pip3 install passlib pexpect jmespath 'python-gitlab>=2.6.0' keyring sagecipher \
     && apk del .build-deps \
-    && { touch /usr/lib/python3.11/EXTERNALLY-MANAGED || : debug; }\ \
+    && { touch /usr/lib/python3.11/EXTERNALLY-MANAGED || : debug; } \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
-    && { cat /etc/ansible/hosts || : debug; }\
+    && { cat /etc/ansible/hosts || : debug; } \
     && echo -e "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
     ##
     && touch /etc/ssh/ssh_known_hosts \
