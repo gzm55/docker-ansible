@@ -27,5 +27,8 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
 
+      - name: Checkout for Test
+        uses: actions/checkout@v4
+
       - name: Test
         run: docker run --rm -v "`pwd`"/test:/test ${{ env.TEST_TAG }} /test/test-all.sh
