@@ -1,16 +1,16 @@
-FROM alpine:3.13
+FROM alpine:3.19
 
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=2.10.6-r0 \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ansible-lint \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/main ansible=9.1.0-r0 \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
                                         git \
                                         py3-pip \
                                         rsync \
+                                        ansible-lint \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
     && pip3 install passlib pexpect jmespath 'python-gitlab>=2.6.0' keyring sagecipher \
@@ -18,6 +18,7 @@ RUN set -eux \
     ##
     ## add default ansible config
     && mkdir -p /etc/ansible \
+    && { cat /etc/ansible/hosts || : debug; }\
     && echo -e "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
     ##
     && touch /etc/ssh/ssh_known_hosts \
