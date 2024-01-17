@@ -2,7 +2,7 @@ echo
 echo "Check public ssh host keys."
 
 for h in github.com \
-         bitbucket.com bitbucket.org \
+         bitbucket.org \
          gitlab.com \
          git.code.sf.net
 do
