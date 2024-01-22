@@ -3,14 +3,13 @@ FROM alpine:3.19
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ansible=9.1.0-r0 \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ansible=9.1.0-r0 'ansible-lint>=6.22.2' \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
                                         git \
                                         py3-pip \
                                         rsync \
-                                        'ansible-lint>=6.22.2' \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
     && rm /usr/lib/python3.11/EXTERNALLY-MANAGED \
