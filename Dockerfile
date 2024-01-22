@@ -10,7 +10,7 @@ RUN set -eux \
                                         git \
                                         py3-pip \
                                         rsync \
-                                        'ansible-lint>6.22.0-r0' \
+                                        'ansible-lint>=6.22.2' \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
     && rm /usr/lib/python3.11/EXTERNALLY-MANAGED \
