@@ -1,10 +1,10 @@
-FROM alpine:3.20
+FROM alpine:3.19
 
 #ADD content-dev /
 
 RUN set -eux \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/v3.19/community 'ansible-core=2.16.1-r0' \
-    && apk add --no-cache --no-progress ansible=9.5.1-r0 ansible-lint \
+    && apk add --no-cache --no-progress ansible-core=2.16.1-r0 ansible-lint \
+    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/v3.20/community 'ansible=9.5.1-r0' \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
