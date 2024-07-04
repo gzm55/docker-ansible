@@ -4,7 +4,6 @@ FROM alpine:3.19
 
 RUN set -eux \
     && apk add --no-cache --no-progress ansible-core=2.16.1-r0 ansible-lint \
-    && apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/v3.20/community 'ansible=9.5.1-r0' \
     && apk add --no-cache --no-progress openssh-client \
                                         sshpass \
                                         ca-certificates \
@@ -14,6 +13,7 @@ RUN set -eux \
     ## add python packages for runtime deps
     && apk add --no-cache --no-progress --virtual .build-deps gcc musl-dev \
     && rm /usr/lib/python3.11/EXTERNALLY-MANAGED \
+    && pip3 install --no-deps ansible==9.7.0 \
     && pip3 install passlib pexpect jmespath 'python-gitlab>=4.0.0' keyring sagecipher \
     && apk del .build-deps \
     && touch /usr/lib/python3.11/EXTERNALLY-MANAGED \
