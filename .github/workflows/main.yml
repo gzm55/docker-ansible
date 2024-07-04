@@ -13,7 +13,7 @@ on:
 
 env:
   TEST_TAG: gzm55/ansible:test
-  LATEST_TAG: gzm55/ansible:latest,gzm55/ansible:9.7
+  LATEST_TAG: gzm55/ansible:9.7
 
 jobs:
   build:
